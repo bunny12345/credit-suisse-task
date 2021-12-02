@@ -12,10 +12,11 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@v2
       with:
         fetch-depth: '0'
     - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@main
+      uses: anothrNick/github-tag-action@1.36.0
       env:
         GITHUB_TOKEN: ${{ secrets.DEMO_TOKEN }}
+        DRY_RUN: true
