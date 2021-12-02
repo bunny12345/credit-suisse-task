@@ -9,19 +9,23 @@ on:
       - main
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [ 11 ]
+
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-java@v2
-       with:
+      with:
         fetch-depth: '0'
-        java-version: '11'
-        distribution: 'adopt'
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.36.0
       env:
         GITHUB_TOKEN: ${{ secrets.DEMO_TOKEN }}
-        DRY_RUN: true
-    - name: Build project with Maven     
-      run: mvn -B package --file pom.xml
+        DRY_RUN: true    
+        
+    - uses: actions/setup-java@v1
+      with:
+        java-version: ${{ matrix.java-version }}
+    - run: mvn -B install --no-transfer-progress --file pom.xml
+    
