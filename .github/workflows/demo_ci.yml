@@ -5,7 +5,7 @@ name: demo_project
 
 on:
   push:
-    branch:
+    branches:
       - main
 jobs:
   build:
