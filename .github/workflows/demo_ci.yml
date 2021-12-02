@@ -13,10 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
+    - uses: actions/setup-java@v2
+       with:
         fetch-depth: '0'
+        java-version: '11'
+        distribution: 'adopt'
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.36.0
       env:
         GITHUB_TOKEN: ${{ secrets.DEMO_TOKEN }}
         DRY_RUN: true
+    - name: Build project with Maven     
+      run: mvn -B package --file pom.xml
