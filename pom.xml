@@ -39,9 +39,9 @@
 	</build>
 	    <distributionManagement>
             <snapshotRepository>
-            <id>github</id>
+            <id>bunny12345</id>
             <name>GitHub Packages</name>
-            <url>https://github.com/bunny12345/credit-suisse-task/packages</url>
+            <url>https://maven.pkg.github.com/bunny12345/credit-suisse-task</url>
     </snapshotRepository>
 </distributionManagement>
 	
