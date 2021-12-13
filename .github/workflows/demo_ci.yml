@@ -32,7 +32,10 @@ jobs:
   publish-snapshot:
     needs: build
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        java-version: [ 11 ]
+        
     steps:
       - uses: actions/checkout@v2
 
