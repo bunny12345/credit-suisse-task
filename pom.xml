@@ -40,7 +40,7 @@
 	    <distributionManagement>
             <snapshotRepository>
             <id>bunny12345</id>
-            <name>GitHub Packages</name>
+            <name>credit-suisse-task</name>
             <url>https://maven.pkg.github.com/bunny12345/credit-suisse-task</url>
     </snapshotRepository>
 </distributionManagement>
