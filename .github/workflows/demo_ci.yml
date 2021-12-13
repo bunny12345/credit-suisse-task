@@ -45,8 +45,7 @@ jobs:
           java-version: ${{ matrix.java-version }}
 
       - name: Publish SNAPSHOT version to GitHub Packages (we can skip tests since we only deploy if the build workflow succeeded)
-        run: mvn -B deploy --no-transfer-progress -DskipTests --file pom.xml
+        run: mvn clean source:jar deploy -DuniqueVersion=false -Dmaven.source.useDefaultManifestFile=true -DdeplyAtEnd=true -Dmaven.source.includePom=true -Dmaven.install.skip=true
         env:
-        
           GITHUB_TOKEN: ${{ secrets.DEMO_TOKEN }}
     
