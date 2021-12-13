@@ -46,7 +46,7 @@ jobs:
          servers: '[{ "id": "github", "username": "${env.GITHUB_ACTOR}", "password": "${env.GITHUB_TOKEN}" }]'
         
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy --file pom.xml -s ~/.m2/settings.xml
+        run: mvn -B deploy -DskipTests --file pom.xml
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
