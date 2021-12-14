@@ -49,4 +49,31 @@ jobs:
         run: |
           echo "<settings><servers><server><id>github</id><username>$username</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
           mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/bunny12345/credit-suisse-task
+  
+  Publish-Release:
+     needs: publish-snapshot
+     runs-on: ubuntu-latest
+     
+     steps:
+      - uses: actions/checkout@master
+      - name: Create a Release
+        uses: elgohr/Github-Release-Action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+         args: MyReleaseMessage
+         
+  Tag-version:
+      needs: Publish-Release
+      runs-on: ubuntu-latest
+      
+      steps:
+       - uses: actions/checkout@v2
+         with:
+           fetch-depth: '0'
+       - name: Bump version and push tag
+         uses: anothrNick/github-tag-action@1.36.0
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
     
