@@ -38,15 +38,12 @@ jobs:
         
     steps:
       - uses: actions/checkout@v2
-
-      - name: maven-settings-xml-action
-        uses: whelk-io/maven-settings-xml-action@v14
-        with:
-         repositories: '[{ "id": "github", "name": "bunny12345", "url": "https://maven.pkg.github.com/bunny12345/credit-suisse-task", "releases": { "enabled": "false" }, "snapshots": { "enabled": "false" } }]'    
-         servers: '[{ "id": "github", "username": "${env.GITHUB_ACTOR}", "password": "${env.GITHUB_TOKEN}" }]'
-        
+      
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn -B deploy -DskipTests --file pom.xml
         env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           GITHUB_TOKEN: ${{ secrets.DEMO_TOKEN }}
+        run: |
+          mkdir ~/.m2
+          echo "<settings><servers><server><id>github</id><username>bunny12345</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+          mvn -B deploy -DskipTests --file pom.xml
     
