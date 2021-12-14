@@ -48,5 +48,5 @@ jobs:
            username: $GITHUB_ACTOR
         run: |
           echo "<settings><servers><server><id>github</id><username>$username</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
-          mvn deploy
+          mvn deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/bunny12345/credit-suisse-task
     
